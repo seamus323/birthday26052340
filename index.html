@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>生日指令卡片</生日快乐肥老公>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            transition: background-color 0.5s;
+        }
+        #card-container {
+            text-align: center;
+        }
+        #birthday-gif {
+            width: 300px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: all 0.5s;
+        }
+        #command-input {
+            margin-top: 20px;
+            padding: 10px;
+            width: 280px;
+            border: 2px solid #ffcccc;
+            border-radius: 20px;
+            text-align: center;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="card-container">
+        <img id="birthday-gif" src="birthday.gif" alt="生日快乐指令卡片">
+        <br>
+        <input type="text" id="command-input" placeholder="输入指令并回车...">
+    </div>
+
+    <script>
+        const input = document.getElementById('command-input');
+        const gif = document.getElementById('birthday-gif');
+
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const cmd = input.value.trim();
+                
+                if (cmd === 'CHANGE_COLOR') {
+                    // 随机变色
+                    const colors = ['#ffebee', '#e3f2fd', '#e8f5e9', '#fff3e0', '#f3e5f5'];
+                    document.body.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                } else if (cmd === 'DANCE') {
+                    // GIF 本身就有跳舞，这里我们加个额外的动效
+                    gif.style.transform = 'translateY(-20px) rotate(5deg)';
+                    setTimeout(() => gif.style.transform = 'translateY(0) rotate(0deg)', 400);
+                } else if (cmd === 'BIG') {
+                    gif.style.width = '450px';
+                } else if (cmd === 'HIDE') {
+                    gif.style.opacity = '0';
+                    setTimeout(() => gif.style.display = 'none', 500);
+                }
+
+                input.value = ''; // 清空输入框
+            }
+        });
+    </script>
+</body>
+</html>
